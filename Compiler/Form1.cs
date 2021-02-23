@@ -13,23 +13,11 @@ namespace Compiler
     public partial class Form1 : Form
     {
         List<DocPage> Pages;
-        private Stack<string> States, CanceledStates;
         private string CopyBuffer;
 
         public Form1()
         {
             InitializeComponent();
-            States = new Stack<string>();
-            CanceledStates = new Stack<string>();
-            Pages = new List<DocPage>();
-            Pages.Add(new DocPage());
-            PagesTab.TabPages.Add(new TabPage(Pages[0].Title));
-            SaveState();
-        }
-        private void SaveState()
-        {
-            CanceledStates.Clear();
-            States.Push(CodeField.Text);
         }
         private void SaveFile(int pageNumber)
         {
@@ -44,8 +32,7 @@ namespace Compiler
         private void UpdateText(object sender, EventArgs e)
         {
             Pages[PagesTab.SelectedIndex].Text = CodeField.Text;
-            if (CanceledStates.Count == 0)
-                SaveState();
+            BackButton.Enabled = true;
         }
         private void CreateClick(object sender, EventArgs e)
         {
@@ -84,27 +71,31 @@ namespace Compiler
         {
             Close();
         }
+        private void TabChanged(object sender, EventArgs e)
+        {
+            CodeField.Text = Pages[PagesTab.SelectedIndex].Text;
+            ResultField.Text = Pages[PagesTab.SelectedIndex].ResultText;
+        }
 
+        private void CloseForm(object sender, FormClosingEventArgs e)
+        {
+            for (int i = 0; i < Pages.Count; i++)
+                Pages[i].Close();
+        }
         private void CancelClick(object sender, EventArgs e)
         {
-            if (States.Count == 1)
-                return;
-            CanceledStates.Push(States.Pop());
-            CodeField.Text = States.Peek();
-            toolStripButton5.Enabled = true;
-            if (States.Count == 1)
-                toolStripButton4.Enabled = false;
+            Pages[PagesTab.SelectedIndex].CancelState();
+            CodeField.Text = Pages[PagesTab.SelectedIndex].Text;
+            RepeatButton.Enabled = Pages[PagesTab.SelectedIndex].CanRepeat;
+            BackButton.Enabled = Pages[PagesTab.SelectedIndex].CanCancel;
         }
 
         private void RepeatClick(object sender, EventArgs e)
         {
-            if (CanceledStates.Count == 0)
-                return;
-            States.Push(CanceledStates.Pop());
-            CodeField.Text = States.Peek();
-            toolStripButton4.Enabled = true;
-            if (CanceledStates.Count == 0)
-                toolStripButton5.Enabled = false;
+            Pages[PagesTab.SelectedIndex].RepeatState();
+            CodeField.Text = Pages[PagesTab.SelectedIndex].Text;
+            RepeatButton.Enabled = Pages[PagesTab.SelectedIndex].CanRepeat;
+            BackButton.Enabled = Pages[PagesTab.SelectedIndex].CanCancel;
         }
 
         private void CutClick(object sender, EventArgs e)
@@ -115,7 +106,6 @@ namespace Compiler
             CopyBuffer = CodeField.SelectedText;
             CodeField.Text = CodeField.Text.Remove(CodeField.SelectionStart, CodeField.SelectionLength);
             CodeField.SelectionStart = SelectionStart;
-            SaveState();
         }
 
         private void CopyClick(object sender, EventArgs e)
@@ -137,7 +127,6 @@ namespace Compiler
             SelectionStart = CodeField.SelectionStart + CopyBuffer.Length;
             CodeField.Text = CodeField.Text.Insert(CodeField.SelectionStart, CopyBuffer);
             CodeField.SelectionStart = SelectionStart;
-            SaveState();
         }
 
         private void DeleteClick(object sender, EventArgs e)
@@ -147,19 +136,6 @@ namespace Compiler
             int SelectionStart = CodeField.SelectionStart;
             CodeField.Text = CodeField.Text.Remove(CodeField.SelectionStart, CodeField.SelectionLength);
             CodeField.SelectionStart = SelectionStart;
-            SaveState();
-        }
-
-        private void TabChanged(object sender, EventArgs e)
-        {
-            CodeField.Text = Pages[PagesTab.SelectedIndex].Text;
-            ResultField.Text = Pages[PagesTab.SelectedIndex].ResultText;
-        }
-
-        private void CloseForm(object sender, FormClosingEventArgs e)
-        {
-            for (int i = 0; i < Pages.Count; i++)
-                Pages[i].Close();
         }
 
         private void CodeFontUp(object sender, EventArgs e)
@@ -207,6 +183,13 @@ namespace Compiler
         {
             CodeField.AllowDrop = true;
             CodeField.DragDrop += Drop;
+
+            Pages = new List<DocPage>();
+            Pages.Add(new DocPage());
+            PagesTab.TabPages.Add(new TabPage(Pages[0].Title));
+
+            BackButton.Enabled = false;
+            RepeatButton.Enabled = false;
         }
 
         private void About(object sender, EventArgs e)

@@ -15,6 +15,7 @@ namespace Compiler
         private string title;
         private string fileName;
         private bool saved;
+        private Stack<string> States, CanceledStates;
 
         public string Text
         {
@@ -23,11 +24,15 @@ namespace Compiler
             {
                 saved = false;
                 text = value;
+                if (text != States.Peek())
+                    SaveState();
             }
         }
         public string ResultText { get => resultText; }
         public string Title { get => title; }
         public bool Saved { get => saved; }
+        public bool CanCancel { get => States.Count > 1; }
+        public bool CanRepeat { get => CanceledStates.Count > 0; }
         public string FileName { get => fileName; set => fileName = value; }
 
         public static DocPage OpenFromFile(string fileName)
@@ -46,6 +51,9 @@ namespace Compiler
             fileName = null;
             this.title = title;
             saved = false;
+            States = new Stack<string>();
+            CanceledStates = new Stack<string>();
+            SaveState();
         }
 
         public void Close()
@@ -86,5 +94,25 @@ namespace Compiler
             file.Close();
             saved = true;
         }
+        private void SaveState()
+        {
+            CanceledStates.Clear();
+            States.Push(text);
+        }
+        public void CancelState()
+        {
+            if (States.Count == 1)
+                return;
+            CanceledStates.Push(States.Pop());
+            text = States.Peek();
+        }
+        public void RepeatState()
+        {
+            if (CanceledStates.Count == 0)
+                return;
+            States.Push(CanceledStates.Pop());
+            text = States.Peek();
+        }
+
     }
 }
