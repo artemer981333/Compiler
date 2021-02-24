@@ -14,6 +14,7 @@ namespace Compiler
     {
         List<DocPage> Pages;
         Localisation localisation;
+        CodeHandler codeHandler;
         private string CopyBuffer;
 
         public Form1()
@@ -96,6 +97,8 @@ namespace Compiler
                 numbers += i + ":\n";
 
             RowsNumbers.Text = numbers;
+
+            codeHandler.HandleText();
         }
         private void TabChanged(object sender, EventArgs e)
         {
@@ -236,6 +239,8 @@ namespace Compiler
             RepeatButton.Enabled = false;
 
             RowsNumbers.Font = CodeField.Font;
+
+            codeHandler = new CodeHandler(CodeField);
 
             UpdateInterface();
         }
