@@ -10,7 +10,7 @@ namespace Compiler
 {
     class DocPage
     {
-        private static string defaultTitle = "";
+        private static string defaultTitle = "Default Title Not Initialised";
         private string resultText;
         private string text;
         private string title;
@@ -69,43 +69,45 @@ namespace Compiler
             SaveState();
         }
 
-        public void Close()
+        public bool Close()
         {
             if (saved)
-                return;
-            DialogResult res = MessageBox.Show("Сохранить файл " + title + "?", "Сохранение файла", MessageBoxButtons.YesNo);
+                return true;
+            DialogResult res = MessageBox.Show("Сохранить файл " + title + "?", "Сохранение файла", MessageBoxButtons.YesNoCancel);
             if (res == DialogResult.Yes)
                 Save();
+            if (res == DialogResult.Cancel)
+                return false;
+            return true;
         }
 
-        public void Save()
+        public bool Save()
         {
             if (saved)
-                return;
+                return true;
             if (fileName == null)
-            {
-                SaveAs();
-                return;
-            }
+                return SaveAs();
             StreamWriter file = new StreamWriter(fileName);
             file.Write(text);
             file.Close();
             saved = true;
+            return true;
         }
-        public void SaveAs()
+        public bool SaveAs()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.FileName = title;
             saveFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             DialogResult dialogResult = saveFileDialog.ShowDialog();
             if (dialogResult == DialogResult.Cancel)
-                return;
+                return false;
             fileName = saveFileDialog.FileName;
             title = fileName;
             StreamWriter file = new StreamWriter(fileName);
             file.Write(text);
             file.Close();
             saved = true;
+            return true;
         }
         private void SaveState()
         {

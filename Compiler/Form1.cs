@@ -39,6 +39,8 @@ namespace Compiler
         {
             Pages.Add(new DocPage());
             PagesTab.TabPages.Add(new TabPage(Pages[Pages.Count - 1].Title));
+            PagesTab.SelectedIndex = Pages.Count - 1;
+            UpdateInterface();
         }
         private void OpenClick(object sender, EventArgs e)
         {
@@ -56,6 +58,8 @@ namespace Compiler
             {
                 ResultField.Text = err.Message;
             }
+            PagesTab.SelectedIndex = Pages.Count - 1;
+            UpdateInterface();
         }
 
         private void SaveClick(object sender, EventArgs e)
@@ -110,7 +114,11 @@ namespace Compiler
         private void CloseForm(object sender, FormClosingEventArgs e)
         {
             for (int i = 0; i < Pages.Count; i++)
-                Pages[i].Close();
+                if (!Pages[i].Close())
+                {
+                    e.Cancel = true;
+                    return;
+                }
         }
         private void CancelClick(object sender, EventArgs e)
         {
@@ -145,6 +153,10 @@ namespace Compiler
 
         private void PasteClick(object sender, EventArgs e)
         {
+            if (CopyBuffer == null)
+                return;
+            if (CopyBuffer == "")
+                return;
             int SelectionStart;
             if(CodeField.SelectionLength != 0)
             {
@@ -225,6 +237,7 @@ namespace Compiler
 
             RowsNumbers.Font = CodeField.Font;
 
+            UpdateInterface();
         }
 
         private void Locale()
@@ -289,12 +302,12 @@ namespace Compiler
             }
         }
 
-        private void FontChanged(object sender, EventArgs e)
+        private void RTBFontChanged(object sender, EventArgs e)
         {
             RowsNumbers.Font = CodeField.Font;
         }
 
-        private void Scroll(object sender, EventArgs e)
+        private void RTBScroll(object sender, EventArgs e)
         {
             UpdateInterface();
         }

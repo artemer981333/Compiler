@@ -78,16 +78,21 @@
             this.CutButton = new System.Windows.Forms.ToolStripButton();
             this.PasteButton = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.RowsNumbers = new System.Windows.Forms.RichTextBox();
             this.CodeField = new System.Windows.Forms.RichTextBox();
             this.ResultField = new System.Windows.Forms.RichTextBox();
             this.PagesTab = new System.Windows.Forms.TabControl();
-            this.RowsNumbers = new System.Windows.Forms.RichTextBox();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -101,7 +106,7 @@
             this.ViewStrip});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(823, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(806, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -114,41 +119,41 @@
             this.SaveAsStrip,
             this.ExitStrip});
             this.FileStrip.Name = "FileStrip";
-            this.FileStrip.Size = new System.Drawing.Size(48, 20);
+            this.FileStrip.Size = new System.Drawing.Size(45, 20);
             this.FileStrip.Text = "Файл";
             // 
             // CreateStrip
             // 
             this.CreateStrip.Name = "CreateStrip";
-            this.CreateStrip.Size = new System.Drawing.Size(180, 22);
+            this.CreateStrip.Size = new System.Drawing.Size(150, 22);
             this.CreateStrip.Text = "Создать";
             this.CreateStrip.Click += new System.EventHandler(this.CreateClick);
             // 
             // OpenStrip
             // 
             this.OpenStrip.Name = "OpenStrip";
-            this.OpenStrip.Size = new System.Drawing.Size(180, 22);
+            this.OpenStrip.Size = new System.Drawing.Size(150, 22);
             this.OpenStrip.Text = "Открыть";
             this.OpenStrip.Click += new System.EventHandler(this.OpenClick);
             // 
             // SaveStrip
             // 
             this.SaveStrip.Name = "SaveStrip";
-            this.SaveStrip.Size = new System.Drawing.Size(180, 22);
+            this.SaveStrip.Size = new System.Drawing.Size(150, 22);
             this.SaveStrip.Text = "Сохранить";
             this.SaveStrip.Click += new System.EventHandler(this.SaveClick);
             // 
             // SaveAsStrip
             // 
             this.SaveAsStrip.Name = "SaveAsStrip";
-            this.SaveAsStrip.Size = new System.Drawing.Size(180, 22);
+            this.SaveAsStrip.Size = new System.Drawing.Size(150, 22);
             this.SaveAsStrip.Text = "Сохранить как";
             this.SaveAsStrip.Click += new System.EventHandler(this.SaveAsClick);
             // 
             // ExitStrip
             // 
             this.ExitStrip.Name = "ExitStrip";
-            this.ExitStrip.Size = new System.Drawing.Size(180, 22);
+            this.ExitStrip.Size = new System.Drawing.Size(150, 22);
             this.ExitStrip.Text = "Выход";
             this.ExitStrip.Click += new System.EventHandler(this.ExitClick);
             // 
@@ -163,55 +168,55 @@
             this.DeleteStrip,
             this.SelectAllStrip});
             this.EditStrip.Name = "EditStrip";
-            this.EditStrip.Size = new System.Drawing.Size(59, 20);
+            this.EditStrip.Size = new System.Drawing.Size(56, 20);
             this.EditStrip.Text = "Правка";
             // 
             // CancelStrip
             // 
             this.CancelStrip.Name = "CancelStrip";
-            this.CancelStrip.Size = new System.Drawing.Size(180, 22);
+            this.CancelStrip.Size = new System.Drawing.Size(145, 22);
             this.CancelStrip.Text = "Отменить";
             this.CancelStrip.Click += new System.EventHandler(this.CancelClick);
             // 
             // RepeatStrip
             // 
             this.RepeatStrip.Name = "RepeatStrip";
-            this.RepeatStrip.Size = new System.Drawing.Size(180, 22);
+            this.RepeatStrip.Size = new System.Drawing.Size(145, 22);
             this.RepeatStrip.Text = "Повторить";
             this.RepeatStrip.Click += new System.EventHandler(this.RepeatClick);
             // 
             // CutStrip
             // 
             this.CutStrip.Name = "CutStrip";
-            this.CutStrip.Size = new System.Drawing.Size(180, 22);
+            this.CutStrip.Size = new System.Drawing.Size(145, 22);
             this.CutStrip.Text = "Вырезать";
             this.CutStrip.Click += new System.EventHandler(this.CutClick);
             // 
             // CopyStrip
             // 
             this.CopyStrip.Name = "CopyStrip";
-            this.CopyStrip.Size = new System.Drawing.Size(180, 22);
+            this.CopyStrip.Size = new System.Drawing.Size(145, 22);
             this.CopyStrip.Text = "Копировать";
             this.CopyStrip.Click += new System.EventHandler(this.CopyClick);
             // 
             // PasteStrip
             // 
             this.PasteStrip.Name = "PasteStrip";
-            this.PasteStrip.Size = new System.Drawing.Size(180, 22);
+            this.PasteStrip.Size = new System.Drawing.Size(145, 22);
             this.PasteStrip.Text = "Вставить";
             this.PasteStrip.Click += new System.EventHandler(this.PasteClick);
             // 
             // DeleteStrip
             // 
             this.DeleteStrip.Name = "DeleteStrip";
-            this.DeleteStrip.Size = new System.Drawing.Size(180, 22);
+            this.DeleteStrip.Size = new System.Drawing.Size(145, 22);
             this.DeleteStrip.Text = "Удалить";
             this.DeleteStrip.Click += new System.EventHandler(this.DeleteClick);
             // 
             // SelectAllStrip
             // 
             this.SelectAllStrip.Name = "SelectAllStrip";
-            this.SelectAllStrip.Size = new System.Drawing.Size(180, 22);
+            this.SelectAllStrip.Size = new System.Drawing.Size(145, 22);
             this.SelectAllStrip.Text = "Выделить все";
             this.SelectAllStrip.Click += new System.EventHandler(this.SelectAllClick);
             // 
@@ -233,55 +238,55 @@
             // T1Strip
             // 
             this.T1Strip.Name = "T1Strip";
-            this.T1Strip.Size = new System.Drawing.Size(288, 22);
+            this.T1Strip.Size = new System.Drawing.Size(270, 22);
             this.T1Strip.Text = "Постановка задачи";
             // 
             // T2Strip
             // 
             this.T2Strip.Name = "T2Strip";
-            this.T2Strip.Size = new System.Drawing.Size(288, 22);
+            this.T2Strip.Size = new System.Drawing.Size(270, 22);
             this.T2Strip.Text = "Грамматика";
             // 
             // T3Strip
             // 
             this.T3Strip.Name = "T3Strip";
-            this.T3Strip.Size = new System.Drawing.Size(288, 22);
+            this.T3Strip.Size = new System.Drawing.Size(270, 22);
             this.T3Strip.Text = "Классификация грамматики";
             // 
             // T4Strip
             // 
             this.T4Strip.Name = "T4Strip";
-            this.T4Strip.Size = new System.Drawing.Size(288, 22);
+            this.T4Strip.Size = new System.Drawing.Size(270, 22);
             this.T4Strip.Text = "Метод анализа";
             // 
             // T5Strip
             // 
             this.T5Strip.Name = "T5Strip";
-            this.T5Strip.Size = new System.Drawing.Size(288, 22);
+            this.T5Strip.Size = new System.Drawing.Size(270, 22);
             this.T5Strip.Text = "Диагностика и нейтрализация ошибок";
             // 
             // T6Strip
             // 
             this.T6Strip.Name = "T6Strip";
-            this.T6Strip.Size = new System.Drawing.Size(288, 22);
+            this.T6Strip.Size = new System.Drawing.Size(270, 22);
             this.T6Strip.Text = "Тестовый пример";
             // 
             // T7Strip
             // 
             this.T7Strip.Name = "T7Strip";
-            this.T7Strip.Size = new System.Drawing.Size(288, 22);
+            this.T7Strip.Size = new System.Drawing.Size(270, 22);
             this.T7Strip.Text = "Список литературы";
             // 
             // T8Strip
             // 
             this.T8Strip.Name = "T8Strip";
-            this.T8Strip.Size = new System.Drawing.Size(288, 22);
+            this.T8Strip.Size = new System.Drawing.Size(270, 22);
             this.T8Strip.Text = "Исходный код программы";
             // 
             // PlayStrip
             // 
             this.PlayStrip.Name = "PlayStrip";
-            this.PlayStrip.Size = new System.Drawing.Size(46, 20);
+            this.PlayStrip.Size = new System.Drawing.Size(43, 20);
             this.PlayStrip.Text = "Пуск";
             // 
             // InfoStrip
@@ -290,19 +295,19 @@
             this.CallInfoStrip,
             this.AboutStrip});
             this.InfoStrip.Name = "InfoStrip";
-            this.InfoStrip.Size = new System.Drawing.Size(65, 20);
+            this.InfoStrip.Size = new System.Drawing.Size(62, 20);
             this.InfoStrip.Text = "Справка";
             // 
             // CallInfoStrip
             // 
             this.CallInfoStrip.Name = "CallInfoStrip";
-            this.CallInfoStrip.Size = new System.Drawing.Size(180, 22);
+            this.CallInfoStrip.Size = new System.Drawing.Size(149, 22);
             this.CallInfoStrip.Text = "Вызов справки";
             // 
             // AboutStrip
             // 
             this.AboutStrip.Name = "AboutStrip";
-            this.AboutStrip.Size = new System.Drawing.Size(180, 22);
+            this.AboutStrip.Size = new System.Drawing.Size(149, 22);
             this.AboutStrip.Text = "О программе";
             this.AboutStrip.Click += new System.EventHandler(this.About);
             // 
@@ -311,7 +316,7 @@
             this.ViewStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TextSizeStrip});
             this.ViewStrip.Name = "ViewStrip";
-            this.ViewStrip.Size = new System.Drawing.Size(39, 20);
+            this.ViewStrip.Size = new System.Drawing.Size(38, 20);
             this.ViewStrip.Text = "Вид";
             // 
             // TextSizeStrip
@@ -320,7 +325,7 @@
             this.CodeFieldStrip,
             this.ResultFieldStrip});
             this.TextSizeStrip.Name = "TextSizeStrip";
-            this.TextSizeStrip.Size = new System.Drawing.Size(180, 22);
+            this.TextSizeStrip.Size = new System.Drawing.Size(147, 22);
             this.TextSizeStrip.Text = "Размер текста";
             // 
             // CodeFieldStrip
@@ -329,20 +334,20 @@
             this.CodeFontUpStrip,
             this.CodeFontDownStrip});
             this.CodeFieldStrip.Name = "CodeFieldStrip";
-            this.CodeFieldStrip.Size = new System.Drawing.Size(180, 22);
+            this.CodeFieldStrip.Size = new System.Drawing.Size(142, 22);
             this.CodeFieldStrip.Text = "Окно кода";
             // 
             // CodeFontUpStrip
             // 
             this.CodeFontUpStrip.Name = "CodeFontUpStrip";
-            this.CodeFontUpStrip.Size = new System.Drawing.Size(180, 22);
+            this.CodeFontUpStrip.Size = new System.Drawing.Size(168, 22);
             this.CodeFontUpStrip.Text = "Увеличить шрифт";
             this.CodeFontUpStrip.Click += new System.EventHandler(this.CodeFontUp);
             // 
             // CodeFontDownStrip
             // 
             this.CodeFontDownStrip.Name = "CodeFontDownStrip";
-            this.CodeFontDownStrip.Size = new System.Drawing.Size(180, 22);
+            this.CodeFontDownStrip.Size = new System.Drawing.Size(168, 22);
             this.CodeFontDownStrip.Text = "Уменьшить шрифт";
             this.CodeFontDownStrip.Click += new System.EventHandler(this.CodeFontDown);
             // 
@@ -352,26 +357,27 @@
             this.ResultFontUpStrip,
             this.ResultFontDownStrip});
             this.ResultFieldStrip.Name = "ResultFieldStrip";
-            this.ResultFieldStrip.Size = new System.Drawing.Size(180, 22);
+            this.ResultFieldStrip.Size = new System.Drawing.Size(142, 22);
             this.ResultFieldStrip.Text = "Окно вывода";
             // 
             // ResultFontUpStrip
             // 
             this.ResultFontUpStrip.DropDown = this.contextMenuStrip1;
             this.ResultFontUpStrip.Name = "ResultFontUpStrip";
-            this.ResultFontUpStrip.Size = new System.Drawing.Size(180, 22);
+            this.ResultFontUpStrip.Size = new System.Drawing.Size(168, 22);
             this.ResultFontUpStrip.Text = "Увеличить шрифт";
             this.ResultFontUpStrip.Click += new System.EventHandler(this.OutFontUp);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.OwnerItem = this.ResultFontUpStrip;
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // ResultFontDownStrip
             // 
             this.ResultFontDownStrip.Name = "ResultFontDownStrip";
-            this.ResultFontDownStrip.Size = new System.Drawing.Size(180, 22);
+            this.ResultFontDownStrip.Size = new System.Drawing.Size(168, 22);
             this.ResultFontDownStrip.Text = "Уменьшить шрифт";
             this.ResultFontDownStrip.Click += new System.EventHandler(this.OutFontDown);
             // 
@@ -389,7 +395,7 @@
             this.PasteButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(823, 39);
+            this.toolStrip1.Size = new System.Drawing.Size(806, 39);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -491,36 +497,50 @@
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(12, 95);
+            this.splitContainer1.Location = new System.Drawing.Point(12, 102);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.RowsNumbers);
-            this.splitContainer1.Panel1.Controls.Add(this.CodeField);
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.ResultField);
-            this.splitContainer1.Size = new System.Drawing.Size(799, 530);
-            this.splitContainer1.SplitterDistance = 264;
+            this.splitContainer1.Size = new System.Drawing.Size(782, 595);
+            this.splitContainer1.SplitterDistance = 296;
             this.splitContainer1.TabIndex = 4;
+            // 
+            // RowsNumbers
+            // 
+            this.RowsNumbers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RowsNumbers.Location = new System.Drawing.Point(0, 0);
+            this.RowsNumbers.Margin = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.RowsNumbers.Name = "RowsNumbers";
+            this.RowsNumbers.ReadOnly = true;
+            this.RowsNumbers.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.RowsNumbers.Size = new System.Drawing.Size(50, 290);
+            this.RowsNumbers.TabIndex = 4;
+            this.RowsNumbers.Text = "";
             // 
             // CodeField
             // 
-            this.CodeField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.CodeField.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CodeField.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CodeField.Location = new System.Drawing.Point(47, 3);
+            this.CodeField.Location = new System.Drawing.Point(0, 0);
             this.CodeField.Margin = new System.Windows.Forms.Padding(0);
             this.CodeField.Name = "CodeField";
             this.CodeField.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.CodeField.Size = new System.Drawing.Size(749, 258);
+            this.CodeField.Size = new System.Drawing.Size(721, 290);
             this.CodeField.TabIndex = 3;
             this.CodeField.Text = "";
-            this.CodeField.VScroll += new System.EventHandler(this.Scroll);
-            this.CodeField.FontChanged += new System.EventHandler(this.FontChanged);
+            this.CodeField.VScroll += new System.EventHandler(this.RTBScroll);
+            this.CodeField.FontChanged += new System.EventHandler(this.RTBFontChanged);
             this.CodeField.TextChanged += new System.EventHandler(this.UpdateText);
             // 
             // ResultField
@@ -533,7 +553,7 @@
             this.ResultField.Name = "ResultField";
             this.ResultField.ReadOnly = true;
             this.ResultField.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.ResultField.Size = new System.Drawing.Size(793, 256);
+            this.ResultField.Size = new System.Drawing.Size(776, 289);
             this.ResultField.TabIndex = 3;
             this.ResultField.Text = "";
             // 
@@ -542,35 +562,44 @@
             this.PagesTab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PagesTab.Location = new System.Drawing.Point(12, 67);
+            this.PagesTab.Location = new System.Drawing.Point(12, 66);
+            this.PagesTab.MaximumSize = new System.Drawing.Size(10000, 29);
+            this.PagesTab.MinimumSize = new System.Drawing.Size(0, 29);
             this.PagesTab.Name = "PagesTab";
             this.PagesTab.SelectedIndex = 0;
-            this.PagesTab.Size = new System.Drawing.Size(799, 25);
+            this.PagesTab.Size = new System.Drawing.Size(782, 29);
             this.PagesTab.TabIndex = 5;
             this.PagesTab.SelectedIndexChanged += new System.EventHandler(this.TabChanged);
             this.PagesTab.DragDrop += new System.Windows.Forms.DragEventHandler(this.Drop);
             this.PagesTab.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PagesTabPressDown);
             // 
-            // RowsNumbers
+            // splitContainer2
             // 
-            this.RowsNumbers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.RowsNumbers.Location = new System.Drawing.Point(4, 3);
-            this.RowsNumbers.Margin = new System.Windows.Forms.Padding(0);
-            this.RowsNumbers.Name = "RowsNumbers";
-            this.RowsNumbers.ReadOnly = true;
-            this.RowsNumbers.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.RowsNumbers.Size = new System.Drawing.Size(43, 258);
-            this.RowsNumbers.TabIndex = 4;
-            this.RowsNumbers.Text = "";
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer2.IsSplitterFixed = true;
+            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.RowsNumbers);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.CodeField);
+            this.splitContainer2.Size = new System.Drawing.Size(776, 290);
+            this.splitContainer2.SplitterDistance = 51;
+            this.splitContainer2.TabIndex = 5;
             // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(823, 647);
+            this.ClientSize = new System.Drawing.Size(806, 712);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.PagesTab);
             this.Controls.Add(this.toolStrip1);
@@ -590,6 +619,10 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -649,6 +682,7 @@
         private System.Windows.Forms.ToolStripMenuItem ResultFontUpStrip;
         private System.Windows.Forms.ToolStripMenuItem ResultFontDownStrip;
         private System.Windows.Forms.RichTextBox RowsNumbers;
+        private System.Windows.Forms.SplitContainer splitContainer2;
     }
 }
 
