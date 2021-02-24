@@ -10,6 +10,7 @@ namespace Compiler
 {
     class DocPage
     {
+        private static string defaultTitle = "";
         private string resultText;
         private string text;
         private string title;
@@ -34,6 +35,7 @@ namespace Compiler
         public bool CanCancel { get => States.Count > 1; }
         public bool CanRepeat { get => CanceledStates.Count > 0; }
         public string FileName { get => fileName; set => fileName = value; }
+        public static string DefaultTitle { get => defaultTitle; set => defaultTitle = value; }
 
         public static DocPage OpenFromFile(string fileName)
         {
@@ -44,12 +46,23 @@ namespace Compiler
             ret.saved = true;
             return ret;
         }
-        public DocPage(string title = "Новый документ")
+        public DocPage(string title)
         {
             text = "";
             resultText = "";
             fileName = null;
             this.title = title;
+            saved = false;
+            States = new Stack<string>();
+            CanceledStates = new Stack<string>();
+            SaveState();
+        }
+        public DocPage()
+        {
+            text = "";
+            resultText = "";
+            fileName = null;
+            this.title = defaultTitle;
             saved = false;
             States = new Stack<string>();
             CanceledStates = new Stack<string>();

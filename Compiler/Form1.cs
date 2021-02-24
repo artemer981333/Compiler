@@ -13,6 +13,7 @@ namespace Compiler
     public partial class Form1 : Form
     {
         List<DocPage> Pages;
+        Localisation localisation;
         private string CopyBuffer;
 
         public Form1()
@@ -32,7 +33,7 @@ namespace Compiler
         private void UpdateText(object sender, EventArgs e)
         {
             Pages[PagesTab.SelectedIndex].Text = CodeField.Text;
-            BackButton.Enabled = true;
+            UpdateInterface();
         }
         private void CreateClick(object sender, EventArgs e)
         {
@@ -71,10 +72,39 @@ namespace Compiler
         {
             Close();
         }
+        private void UpdateInterface()
+        {
+            if (PagesTab.SelectedIndex == -1)
+            {
+                RepeatButton.Enabled = false;
+                BackButton.Enabled = false;
+                RowsNumbers.Text = "";
+                return;
+            }
+
+            RepeatButton.Enabled = Pages[PagesTab.SelectedIndex].CanRepeat;
+            BackButton.Enabled = Pages[PagesTab.SelectedIndex].CanCancel;
+
+            string numbers = "";
+            int start = CodeField.GetLineFromCharIndex(CodeField.GetCharIndexFromPosition(new Point(0, 0)));
+            int end = CodeField.GetLineFromCharIndex(CodeField.GetCharIndexFromPosition(new Point(CodeField.Size.Width, CodeField.Size.Height)));
+            for (int i = start; i <= end; i++)
+                numbers += i + ":\n";
+
+            RowsNumbers.Text = numbers;
+        }
         private void TabChanged(object sender, EventArgs e)
         {
+            if (PagesTab.SelectedIndex == -1)
+            {
+                CodeField.Text = "";
+                ResultField.Text = "";
+                UpdateInterface();
+                return;
+            }
             CodeField.Text = Pages[PagesTab.SelectedIndex].Text;
             ResultField.Text = Pages[PagesTab.SelectedIndex].ResultText;
+            UpdateInterface();
         }
 
         private void CloseForm(object sender, FormClosingEventArgs e)
@@ -86,16 +116,14 @@ namespace Compiler
         {
             Pages[PagesTab.SelectedIndex].CancelState();
             CodeField.Text = Pages[PagesTab.SelectedIndex].Text;
-            RepeatButton.Enabled = Pages[PagesTab.SelectedIndex].CanRepeat;
-            BackButton.Enabled = Pages[PagesTab.SelectedIndex].CanCancel;
+            UpdateInterface();
         }
 
         private void RepeatClick(object sender, EventArgs e)
         {
             Pages[PagesTab.SelectedIndex].RepeatState();
             CodeField.Text = Pages[PagesTab.SelectedIndex].Text;
-            RepeatButton.Enabled = Pages[PagesTab.SelectedIndex].CanRepeat;
-            BackButton.Enabled = Pages[PagesTab.SelectedIndex].CanCancel;
+            UpdateInterface();
         }
 
         private void CutClick(object sender, EventArgs e)
@@ -184,14 +212,61 @@ namespace Compiler
             CodeField.AllowDrop = true;
             CodeField.DragDrop += Drop;
 
+            localisation = new Localisation();
+            localisation.LoadFromFile("LocalisationEN.txt");
+            Locale();
+
             Pages = new List<DocPage>();
             Pages.Add(new DocPage());
             PagesTab.TabPages.Add(new TabPage(Pages[0].Title));
 
             BackButton.Enabled = false;
             RepeatButton.Enabled = false;
+
+            RowsNumbers.Font = CodeField.Font;
+
         }
 
+        private void Locale()
+        {
+            FileStrip.Text = localisation["Файл"];
+            EditStrip.Text = localisation["Правка"];
+            TextStrip.Text = localisation["Текст"];
+            PlayStrip.Text = localisation["Пуск"];
+            InfoStrip.Text = localisation["Справка"];
+            ViewStrip.Text = localisation["Вид"];
+            CreateStrip.Text = localisation["Создать"];
+            OpenStrip.Text = localisation["Открыть"];
+            SaveStrip.Text = localisation["Сохранить"];
+            SaveAsStrip.Text = localisation["Сохранить как"];
+            ExitStrip.Text = localisation["Выход"];
+            CancelStrip.Text = localisation["Отменить"];
+            RepeatStrip.Text = localisation["Повторить"];
+            CutStrip.Text = localisation["Вырезать"];
+            CopyStrip.Text = localisation["Копировать"];
+            PasteStrip.Text = localisation["Вставить"];
+            DeleteStrip.Text = localisation["Удалить"];
+            SelectAllStrip.Text = localisation["Выделить все"];
+            T1Strip.Text = localisation["Постановка задачи"];
+            T2Strip.Text = localisation["Грамматика"];
+            T3Strip.Text = localisation["Классификация грамматики"];
+            T4Strip.Text = localisation["Метод анализа"];
+            T5Strip.Text = localisation["Диагностика и нейтрализация ошибок"];
+            T6Strip.Text = localisation["Тестовый пример"];
+            T7Strip.Text = localisation["Список литературы"];
+            T8Strip.Text = localisation["Исходный код программы"];
+            CallInfoStrip.Text = localisation["Вызов справки"];
+            AboutStrip.Text = localisation["О программе"];
+            TextSizeStrip.Text = localisation["Размер текста"];
+            CodeFieldStrip.Text = localisation["Окно кода"];
+            ResultFieldStrip.Text = localisation["Окно вывода"];
+            CodeFontUpStrip.Text = localisation["Увеличить шрифт"];
+            CodeFontDownStrip.Text = localisation["Уменьшить шрифт"];
+            ResultFontUpStrip.Text = localisation["Увеличить шрифт"];
+            ResultFontDownStrip.Text = localisation["Уменьшить шрифт"];
+
+            DocPage.DefaultTitle = localisation["Новый документ"];
+        }
         private void About(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("help\\index.html");
@@ -201,6 +276,27 @@ namespace Compiler
         {
             CodeField.SelectionStart = 0;
             CodeField.SelectionLength = CodeField.Text.Length;
+        }
+
+        private void PagesTabPressDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            {
+                int index = PagesTab.SelectedIndex;
+                Pages[index].Close();
+                Pages.Remove(Pages[index]);
+                PagesTab.TabPages.Remove(PagesTab.TabPages[index]);
+            }
+        }
+
+        private void FontChanged(object sender, EventArgs e)
+        {
+            RowsNumbers.Font = CodeField.Font;
+        }
+
+        private void Scroll(object sender, EventArgs e)
+        {
+            UpdateInterface();
         }
     }
 }
