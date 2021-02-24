@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -40,8 +41,14 @@ namespace Compiler
         public static DocPage OpenFromFile(string fileName)
         {
             StreamReader file = new StreamReader(fileName);
-            DocPage ret = new DocPage(fileName);
+            Regex regex = new Regex(@"[^\\]+$");
+            MatchCollection matchCollection = regex.Matches(fileName);
+
+            DocPage ret = new DocPage(matchCollection[matchCollection.Count - 1].Value);
             ret.text = file.ReadToEnd();
+            file.Close();
+            ret.States.Clear();
+            ret.SaveState();
             ret.fileName = fileName;
             ret.saved = true;
             return ret;
@@ -102,7 +109,9 @@ namespace Compiler
             if (dialogResult == DialogResult.Cancel)
                 return false;
             fileName = saveFileDialog.FileName;
-            title = fileName;
+            Regex regex = new Regex(@"[^\\]+$");
+            MatchCollection matchCollection = regex.Matches(fileName);
+            title = matchCollection[matchCollection.Count - 1].Value;
             StreamWriter file = new StreamWriter(fileName);
             file.Write(text);
             file.Close();

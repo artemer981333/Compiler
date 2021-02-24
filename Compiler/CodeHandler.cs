@@ -28,6 +28,9 @@ namespace Compiler
             MatchCollection matchCollection = integer.Matches(richTextBox.Text);
             int selectionStart = richTextBox.SelectionStart;
             int selectionLength = richTextBox.SelectionLength;
+            richTextBox.SelectionStart = 0;
+            richTextBox.SelectionLength = richTextBox.Text.Length;
+            richTextBox.SelectionColor = Color.Black;
             foreach (Match match in matchCollection)
             {
                 richTextBox.SelectionStart = match.Index;

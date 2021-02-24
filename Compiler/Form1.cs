@@ -126,6 +126,7 @@ namespace Compiler
         private void CancelClick(object sender, EventArgs e)
         {
             Pages[PagesTab.SelectedIndex].CancelState();
+            int index = CodeField.SelectionStart;
             CodeField.Text = Pages[PagesTab.SelectedIndex].Text;
             UpdateInterface();
         }
@@ -315,6 +316,18 @@ namespace Compiler
         private void RTBScroll(object sender, EventArgs e)
         {
             UpdateInterface();
+        }
+
+        private void FormKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.S && e.Control)
+            {
+                SaveButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.Z && e.Control)
+            {
+                BackButton.PerformClick();
+            }
         }
     }
 }
