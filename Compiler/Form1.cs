@@ -13,7 +13,7 @@ namespace Compiler
     public partial class Form1 : Form
     {
         List<DocPage> Pages;
-        Localisation localisation;
+        LocalisationController localisation;
         CodeHandler codeHandler;
         private string CopyBuffer;
 
@@ -82,13 +82,13 @@ namespace Compiler
             if (PagesTab.SelectedIndex == -1)
             {
                 RepeatButton.Enabled = false;
-                BackButton.Enabled = false;
+                CancelButton.Enabled = false;
                 RowsNumbers.Text = "";
                 return;
             }
 
             RepeatButton.Enabled = Pages[PagesTab.SelectedIndex].CanRepeat;
-            BackButton.Enabled = Pages[PagesTab.SelectedIndex].CanCancel;
+            CancelButton.Enabled = Pages[PagesTab.SelectedIndex].CanCancel;
 
             string numbers = "";
             int start = CodeField.GetLineFromCharIndex(CodeField.GetCharIndexFromPosition(new Point(0, 0)));
@@ -228,15 +228,15 @@ namespace Compiler
             CodeField.AllowDrop = true;
             CodeField.DragDrop += Drop;
 
-            localisation = new Localisation();
-            localisation.LoadFromFile("LocalisationEN.txt");
+            localisation = new LocalisationController("Localisations/Localisations.txt");
+            SetLocalisations();
             Locale();
 
             Pages = new List<DocPage>();
             Pages.Add(new DocPage());
             PagesTab.TabPages.Add(new TabPage(Pages[0].Title));
 
-            BackButton.Enabled = false;
+            CancelButton.Enabled = false;
             RepeatButton.Enabled = false;
 
             RowsNumbers.Font = CodeField.Font;
@@ -246,6 +246,18 @@ namespace Compiler
             UpdateInterface();
         }
 
+        private void SetLocalisations()
+        {
+            List<string> loclist = localisation.Localisations;
+            foreach (string str in loclist)
+            {
+                ToolStripMenuItem tmp = new ToolStripMenuItem();
+                tmp.Name = str + "LangStrip";
+                tmp.Click += SetLocalisation;
+                tmp.Text = str;
+                LocalisationStrip.DropDownItems.Add(tmp);
+            }
+        }
         private void Locale()
         {
             FileStrip.Text = localisation["Файл"];
@@ -255,15 +267,23 @@ namespace Compiler
             InfoStrip.Text = localisation["Справка"];
             ViewStrip.Text = localisation["Вид"];
             CreateStrip.Text = localisation["Создать"];
+            CreateButton.Text = localisation["Создать"];
             OpenStrip.Text = localisation["Открыть"];
+            OpenButton.Text = localisation["Открыть"];
             SaveStrip.Text = localisation["Сохранить"];
+            SaveButton.Text = localisation["Сохранить"];
             SaveAsStrip.Text = localisation["Сохранить как"];
             ExitStrip.Text = localisation["Выход"];
             CancelStrip.Text = localisation["Отменить"];
+            CancelButton.Text = localisation["Отменить"];
             RepeatStrip.Text = localisation["Повторить"];
+            RepeatButton.Text = localisation["Повторить"];
             CutStrip.Text = localisation["Вырезать"];
+            CutButton.Text = localisation["Вырезать"];
             CopyStrip.Text = localisation["Копировать"];
+            CopyButton.Text = localisation["Копировать"];
             PasteStrip.Text = localisation["Вставить"];
+            PasteButton.Text = localisation["Вставить"];
             DeleteStrip.Text = localisation["Удалить"];
             SelectAllStrip.Text = localisation["Выделить все"];
             T1Strip.Text = localisation["Постановка задачи"];
@@ -283,12 +303,13 @@ namespace Compiler
             CodeFontDownStrip.Text = localisation["Уменьшить шрифт"];
             ResultFontUpStrip.Text = localisation["Увеличить шрифт"];
             ResultFontDownStrip.Text = localisation["Уменьшить шрифт"];
+            LocalisationStrip.Text = localisation["Локализация"];
 
             DocPage.DefaultTitle = localisation["Новый документ"];
         }
         private void About(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("help\\index.html");
+            System.Diagnostics.Process.Start("Info\\index.html");
         }
 
         private void SelectAllClick(object sender, EventArgs e)
@@ -326,8 +347,14 @@ namespace Compiler
             }
             if (e.KeyCode == Keys.Z && e.Control)
             {
-                BackButton.PerformClick();
+                CancelButton.PerformClick();
             }
+        }
+
+        private void SetLocalisation(object sender, EventArgs e)
+        {
+            localisation.CurrentLocalisation = (sender as ToolStripMenuItem).Text;
+            Locale();
         }
     }
 }

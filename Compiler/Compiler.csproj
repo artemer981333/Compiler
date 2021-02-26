@@ -69,7 +69,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Localisation.cs" />
+    <Compile Include="LocalisationController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -119,6 +119,7 @@
     <Content Include="Info\newtexts.jpg" />
     <Content Include="Info\toolbar.jpg" />
     <Content Include="Info\view.jpg" />
+    <Content Include="Localisations\Localisations.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -67,22 +67,23 @@
             this.ResultFontUpStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ResultFontDownStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.LocalisationStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.CreateButton = new System.Windows.Forms.ToolStripButton();
             this.OpenButton = new System.Windows.Forms.ToolStripButton();
             this.SaveButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.BackButton = new System.Windows.Forms.ToolStripButton();
+            this.CancelButton = new System.Windows.Forms.ToolStripButton();
             this.RepeatButton = new System.Windows.Forms.ToolStripButton();
             this.CopyButton = new System.Windows.Forms.ToolStripButton();
             this.CutButton = new System.Windows.Forms.ToolStripButton();
             this.PasteButton = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.RowsNumbers = new System.Windows.Forms.RichTextBox();
             this.CodeField = new System.Windows.Forms.RichTextBox();
             this.ResultField = new System.Windows.Forms.RichTextBox();
             this.PagesTab = new System.Windows.Forms.TabControl();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -103,7 +104,8 @@
             this.TextStrip,
             this.PlayStrip,
             this.InfoStrip,
-            this.ViewStrip});
+            this.ViewStrip,
+            this.LocalisationStrip});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(806, 24);
@@ -381,6 +383,12 @@
             this.ResultFontDownStrip.Text = "Уменьшить шрифт";
             this.ResultFontDownStrip.Click += new System.EventHandler(this.OutFontDown);
             // 
+            // LocalisationStrip
+            // 
+            this.LocalisationStrip.Name = "LocalisationStrip";
+            this.LocalisationStrip.Size = new System.Drawing.Size(85, 20);
+            this.LocalisationStrip.Text = "Локализация";
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -388,7 +396,7 @@
             this.OpenButton,
             this.SaveButton,
             this.toolStripSeparator1,
-            this.BackButton,
+            this.CancelButton,
             this.RepeatButton,
             this.CopyButton,
             this.CutButton,
@@ -437,16 +445,16 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
             // 
-            // BackButton
+            // CancelButton
             // 
-            this.BackButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BackButton.Image = ((System.Drawing.Image)(resources.GetObject("BackButton.Image")));
-            this.BackButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.BackButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(36, 36);
-            this.BackButton.Text = "Назад";
-            this.BackButton.Click += new System.EventHandler(this.CancelClick);
+            this.CancelButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.CancelButton.Image = ((System.Drawing.Image)(resources.GetObject("CancelButton.Image")));
+            this.CancelButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.CancelButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(36, 36);
+            this.CancelButton.Text = "Назад";
+            this.CancelButton.Click += new System.EventHandler(this.CancelClick);
             // 
             // RepeatButton
             // 
@@ -512,6 +520,27 @@
             this.splitContainer1.SplitterDistance = 296;
             this.splitContainer1.TabIndex = 4;
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer2.IsSplitterFixed = true;
+            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.RowsNumbers);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.CodeField);
+            this.splitContainer2.Size = new System.Drawing.Size(776, 290);
+            this.splitContainer2.SplitterDistance = 51;
+            this.splitContainer2.TabIndex = 5;
+            // 
             // RowsNumbers
             // 
             this.RowsNumbers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -572,27 +601,6 @@
             this.PagesTab.SelectedIndexChanged += new System.EventHandler(this.TabChanged);
             this.PagesTab.DragDrop += new System.Windows.Forms.DragEventHandler(this.Drop);
             this.PagesTab.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PagesTabPressDown);
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer2.IsSplitterFixed = true;
-            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer2.Name = "splitContainer2";
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.RowsNumbers);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.CodeField);
-            this.splitContainer2.Size = new System.Drawing.Size(776, 290);
-            this.splitContainer2.SplitterDistance = 51;
-            this.splitContainer2.TabIndex = 5;
             // 
             // Form1
             // 
@@ -666,7 +674,7 @@
         private System.Windows.Forms.ToolStripButton OpenButton;
         private System.Windows.Forms.ToolStripButton SaveButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton BackButton;
+        private System.Windows.Forms.ToolStripButton CancelButton;
         private System.Windows.Forms.ToolStripButton RepeatButton;
         private System.Windows.Forms.ToolStripButton CopyButton;
         private System.Windows.Forms.ToolStripButton CutButton;
@@ -685,6 +693,7 @@
         private System.Windows.Forms.ToolStripMenuItem ResultFontDownStrip;
         private System.Windows.Forms.RichTextBox RowsNumbers;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.ToolStripMenuItem LocalisationStrip;
     }
 }
 

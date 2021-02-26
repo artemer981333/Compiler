@@ -66,3 +66,5 @@ Font size up
 Font size down
 Новый документ
 New document
+Локализация
+Localisation
