@@ -41,7 +41,6 @@ namespace Compiler
             Pages.Add(new DocPage());
             PagesTab.TabPages.Add(new TabPage(Pages[Pages.Count - 1].Title));
             PagesTab.SelectedIndex = Pages.Count - 1;
-            UpdateInterface();
         }
         private void OpenClick(object sender, EventArgs e)
         {
@@ -60,7 +59,6 @@ namespace Compiler
                 ResultField.Text = err.Message;
             }
             PagesTab.SelectedIndex = Pages.Count - 1;
-            UpdateInterface();
         }
 
         private void SaveClick(object sender, EventArgs e)
@@ -77,6 +75,7 @@ namespace Compiler
         {
             Close();
         }
+
         private void UpdateInterface()
         {
             if (PagesTab.SelectedIndex == -1)
@@ -90,6 +89,12 @@ namespace Compiler
             RepeatButton.Enabled = Pages[PagesTab.SelectedIndex].CanRepeat;
             CancelButton.Enabled = Pages[PagesTab.SelectedIndex].CanCancel;
 
+            UpdateRowsNumbers();
+            codeHandler.HandleText();
+        }
+
+        private void UpdateRowsNumbers()
+        {
             string numbers = "";
             int start = CodeField.GetLineFromCharIndex(CodeField.GetCharIndexFromPosition(new Point(0, 0)));
             int end = CodeField.GetLineFromCharIndex(CodeField.GetCharIndexFromPosition(new Point(CodeField.Size.Width, CodeField.Size.Height)));
@@ -97,21 +102,18 @@ namespace Compiler
                 numbers += i + ":\n";
 
             RowsNumbers.Text = numbers;
-
-            codeHandler.HandleText();
         }
+
         private void TabChanged(object sender, EventArgs e)
         {
             if (PagesTab.SelectedIndex == -1)
             {
                 CodeField.Text = "";
                 ResultField.Text = "";
-                UpdateInterface();
                 return;
             }
             CodeField.Text = Pages[PagesTab.SelectedIndex].Text;
             ResultField.Text = Pages[PagesTab.SelectedIndex].ResultText;
-            UpdateInterface();
         }
 
         private void CloseForm(object sender, FormClosingEventArgs e)
@@ -128,14 +130,12 @@ namespace Compiler
             Pages[PagesTab.SelectedIndex].CancelState();
             int index = CodeField.SelectionStart;
             CodeField.Text = Pages[PagesTab.SelectedIndex].Text;
-            UpdateInterface();
         }
 
         private void RepeatClick(object sender, EventArgs e)
         {
             Pages[PagesTab.SelectedIndex].RepeatState();
             CodeField.Text = Pages[PagesTab.SelectedIndex].Text;
-            UpdateInterface();
         }
 
         private void CutClick(object sender, EventArgs e)
@@ -181,7 +181,7 @@ namespace Compiler
             CodeField.Text = CodeField.Text.Remove(CodeField.SelectionStart, CodeField.SelectionLength);
             CodeField.SelectionStart = SelectionStart;
         }
-
+        
         private void CodeFontUp(object sender, EventArgs e)
         {
             CodeField.Font = new Font(CodeField.Font.FontFamily, Math.Min(CodeField.Font.Size + 1, 20));
@@ -336,7 +336,7 @@ namespace Compiler
 
         private void RTBScroll(object sender, EventArgs e)
         {
-            UpdateInterface();
+           UpdateRowsNumbers();
         }
 
         private void FormKeyDown(object sender, KeyEventArgs e)

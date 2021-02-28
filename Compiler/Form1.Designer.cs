@@ -546,12 +546,13 @@
             this.RowsNumbers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.RowsNumbers.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.RowsNumbers.Location = new System.Drawing.Point(0, 0);
-            this.RowsNumbers.Margin = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.RowsNumbers.Margin = new System.Windows.Forms.Padding(0);
             this.RowsNumbers.Name = "RowsNumbers";
             this.RowsNumbers.ReadOnly = true;
             this.RowsNumbers.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.RowsNumbers.Size = new System.Drawing.Size(50, 290);
+            this.RowsNumbers.Size = new System.Drawing.Size(55, 290);
             this.RowsNumbers.TabIndex = 4;
             this.RowsNumbers.Text = "";
             // 
@@ -560,7 +561,8 @@
             this.CodeField.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.CodeField.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CodeField.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.CodeField.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CodeField.Location = new System.Drawing.Point(0, 0);
             this.CodeField.Margin = new System.Windows.Forms.Padding(0);
             this.CodeField.Name = "CodeField";
@@ -577,6 +579,7 @@
             this.ResultField.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResultField.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ResultField.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ResultField.Location = new System.Drawing.Point(3, 3);
             this.ResultField.Name = "ResultField";

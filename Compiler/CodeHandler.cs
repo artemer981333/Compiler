@@ -16,7 +16,6 @@ namespace Compiler
         private RichTextBox richTextBox;
 
         private Regex integer;
-
         public CodeHandler(RichTextBox textBox)
         {
             richTextBox = textBox;
@@ -26,19 +25,27 @@ namespace Compiler
         public void HandleText()
         {
             MatchCollection matchCollection = integer.Matches(richTextBox.Text);
+            richTextBox.Enabled = false;
+            richTextBox.Visible = false;
+            Control control = richTextBox.Parent;
+            while (control.GetType().Name != "Form1")
+            {
+                control = control.Parent;
+            }
             int selectionStart = richTextBox.SelectionStart;
             int selectionLength = richTextBox.SelectionLength;
-            richTextBox.SelectionStart = 0;
-            richTextBox.SelectionLength = richTextBox.Text.Length;
+            richTextBox.SelectAll();
             richTextBox.SelectionColor = Color.Black;
             foreach (Match match in matchCollection)
             {
-                richTextBox.SelectionStart = match.Index;
-                richTextBox.SelectionLength = match.Length;
+                richTextBox.Select(match.Index, match.Length);
                 richTextBox.SelectionColor = Color.Red;
             }
-            richTextBox.SelectionStart = selectionStart;
-            richTextBox.SelectionLength = selectionLength;
+            richTextBox.Select(selectionStart, selectionLength);
+            richTextBox.Visible = true;
+            richTextBox.Enabled = true;
+            (control as Form).ActiveControl = richTextBox;
+
         }
     }
 }
