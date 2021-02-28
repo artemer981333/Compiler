@@ -106,8 +106,8 @@ namespace Compiler
             {
                 throw new Exception("Не получается открыть файл " + localisationsFileName);
             }
-            Regex pathReg = new Regex(@"[\w|/\.]+\W+=", RegexOptions.Multiline);
-            Regex nameReg = new Regex(@"=\W+(\w)+", RegexOptions.Multiline);
+            Regex pathReg = new Regex(@"[\w|/\.]+(?=\W*=)", RegexOptions.Multiline);
+            Regex nameReg = new Regex(@"(?<==\W*)(\w)+", RegexOptions.Multiline);
             string buffer = file.ReadToEnd();
             MatchCollection paths = pathReg.Matches(buffer);
             MatchCollection names = nameReg.Matches(buffer);
@@ -119,7 +119,7 @@ namespace Compiler
 
             localisations = new List<Localisation>();
             for (int i = 0; i < paths.Count; i++)
-                localisations.Add(new Localisation(names[i].Value.Replace("=", "").Replace(" ", ""), paths[i].Value.Replace("=", "").Replace(" ", "")));
+                localisations.Add(new Localisation(names[i].Value, paths[i].Value));
 
             currentLocalisationIndex = 0;
         }

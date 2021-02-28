@@ -14,17 +14,17 @@ namespace Compiler
     class CodeHandler
     {
         private RichTextBox richTextBox;
-
-        private Regex integer;
+        private KeyWords keyWords;
+        private Identifiers identifiers;
         public CodeHandler(RichTextBox textBox)
         {
             richTextBox = textBox;
-            integer = new Regex(@"\bint\b");
+            keyWords = new KeyWords();
+            identifiers = new Identifiers();
         }
 
         public void HandleText()
         {
-            MatchCollection matchCollection = integer.Matches(richTextBox.Text);
             richTextBox.Enabled = false;
             richTextBox.Visible = false;
             Control control = richTextBox.Parent;
@@ -36,11 +36,22 @@ namespace Compiler
             int selectionLength = richTextBox.SelectionLength;
             richTextBox.SelectAll();
             richTextBox.SelectionColor = Color.Black;
+
+            MatchCollection matchCollection = keyWords.FindMatches(richTextBox.Text);
+            foreach (Match match in matchCollection)
+            {
+                richTextBox.Select(match.Index, match.Length);
+                richTextBox.SelectionColor = Color.Blue;
+            }
+
+            identifiers.LoadIdentifiers(richTextBox.Text);
+            matchCollection = identifiers.FindMatches(richTextBox.Text);
             foreach (Match match in matchCollection)
             {
                 richTextBox.Select(match.Index, match.Length);
                 richTextBox.SelectionColor = Color.Red;
             }
+
             richTextBox.Select(selectionStart, selectionLength);
             richTextBox.Visible = true;
             richTextBox.Enabled = true;
